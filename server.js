@@ -1,17 +1,17 @@
-var path = require('path');
-var express = require('express');
-var app = express();
-var PORT = process.env.PORT || 8080;
-var server = require('http').createServer(app);
-var io = require('socket.io')(server);
+const path = require('path');
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 8080;
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 
 // using webpack-dev-server and middleware in development environment
 if (process.env.NODE_ENV !== 'production') {
-  var webpackDevMiddleware = require('webpack-dev-middleware');
-  var webpackHotMiddleware = require('webpack-hot-middleware');
-  var webpack = require('webpack');
-  var config = require('./webpack.config');
-  var compiler = webpack(config);
+  const webpackDevMiddleware = require('webpack-dev-middleware');
+  const webpackHotMiddleware = require('webpack-hot-middleware');
+  const webpack = require('webpack');
+  const config = require('./webpack.config');
+  const compiler = webpack(config);
 
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
   app.use(webpackHotMiddleware(compiler));
@@ -24,10 +24,10 @@ app.get('/', function(request, response) {
 });
 
 io.on('connection', function(client) {
-  console.log('client connected!');
-
-  client.on('join', function(data) {
-    console.log(data);
+  client.on('bid', function({ item, data, amount }) {
+    // store information in db
+    console.log(item, data, amount);
+    io.emit('bid', { item, person, amount })
   });
 });
 

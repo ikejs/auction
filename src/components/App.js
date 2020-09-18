@@ -1,20 +1,34 @@
 import '../assets/stylesheets/base.scss';
-import React, { Component } from 'react';
-
+import React, { useState } from 'react';
+import MyImage from '../assets/images/bg.jpg';
 let socket = io.connect();
 
-const App = React.createClass({
-  componentDidMount() {
-    socket.on('connect', function(data) {
-      socket.emit('join', 'hello world from the client!');
-    });
-  },
+const App = () => {
 
-  render() {
-    return (
-      <h1>Hello, {this.props.name}!</h1>
-    )
-  }
-});
+  const [items, setItems] = useState([ 
+    { name: "Item 1" },
+    { name: "Item 2" }
+  ])
+
+  socket.on('connect', function(data) {
+    socket.emit('join', 'hello world from the client!');
+  });
+  socket.on('bid', (data) => { 
+    alert('from server');
+    // updateItems()
+  });
+
+  return (
+    <div>
+      <img src={MyImage} alt="torchlight in the sky" />
+      <h1>Items</h1>
+      {
+        items.map((item, i) => { return <h2 key={i}>{item.name}</h2> })
+      }
+    </div>
+  )
+
+}
+
 
 export default App;
