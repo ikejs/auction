@@ -6,18 +6,9 @@ module.exports = {
     './src/index'
   ],
   module: {
-    rules: [
-      {
-        test: /\.(jpg|png)$/,
-        use: {
-          loader: 'url-loader',
-        },
-      },
-    ],
     loaders: [
       { test: /\.js?$/, loader: 'babel', exclude: /node_modules/ },
       { test: /\.s?css$/, loader: 'style!css!sass' },
-      { test: /\.(jpg|png)$/, loader: 'url-loader' },
     ]
   },
   resolve: {

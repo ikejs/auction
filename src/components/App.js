@@ -1,6 +1,6 @@
 import '../assets/stylesheets/base.scss';
 import React, { useState } from 'react';
-import MyImage from '../assets/images/bg.jpg';
+// import MyImage from '../assets/images/bg.jpg';
 let socket = io.connect();
 
 const App = () => {
@@ -20,7 +20,7 @@ const App = () => {
 
   return (
     <div>
-      <img src={MyImage} alt="torchlight in the sky" />
+      <img src="/pepe.png" alt="torchlight in the sky" />
       <h1>Items</h1>
       {
         items.map((item, i) => { return <h2 key={i}>{item.name}</h2> })
