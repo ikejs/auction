@@ -3,18 +3,20 @@ require('dotenv').config({ path: ".env" });
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 8080;
-const server = require("https").createServer(app);
-const io = require("socket.io")(server);
+const server = require("http").createServer(app);
 const mongoose = require("mongoose");
 const ObjectId = require("mongodb").ObjectID;
 
-require("greenlock-express")
+const greenlock = require("greenlock-express")
     .init({
         packageRoot: __dirname,
         configDir: "./greenlock.d",
         maintainerEmail: "ike@holzmann.io",
         cluster: false
     }).serve(app); // listen on 80 & 443
+
+const io = require("socket.io")(greenlock);
+
 
 // connect to db
 mongoose.connect(process.env.MONGODB_URI||"mongodb://localhost:27017/auction", {
@@ -100,12 +102,4 @@ io.on("connection", function(client) {
   });
 
 
-});
-
-server.listen(PORT, function(error) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.info("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
-  }
 });
