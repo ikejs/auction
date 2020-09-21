@@ -2,15 +2,14 @@ const path = require("path");
 require('dotenv').config({ path: ".env" });
 const express = require("express");
 const app = express();
-const glx = require("greenlock-express");
-const production = process.env.production || false;
-const server = production ? glx.httpsServer() : require("http").createServer(app);
+const PORT = process.env.PORT || 8080;
+const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 const mongoose = require("mongoose");
 const ObjectId = require("mongodb").ObjectID;
 
 // connect to db
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/auction", {
+mongoose.connect(process.env.MONGODB_URI||"mongodb://localhost:27017/auction", {
   useNewUrlParser: true,
   useFindAndModify: false,
   useCreateIndex: true,
@@ -22,6 +21,17 @@ db.once("open", function() {
   console.log("database connected")
 });
 
+// using webpack-dev-server and middleware in development environment
+if (process.env.NODE_ENV !== "production") {
+  const webpackDevMiddleware = require("webpack-dev-middleware");
+  const webpackHotMiddleware = require("webpack-hot-middleware");
+  const webpack = require("webpack");
+  const config = require("./webpack.config");
+  const compiler = webpack(config);
+
+  app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
+  app.use(webpackHotMiddleware(compiler));
+}
 
 app.use(express.static(path.join(__dirname, "dist")));
 app.use(express.static(path.join(__dirname, "public")));
@@ -29,10 +39,15 @@ app.use(express.static(path.join(__dirname, "public")));
 const User = require('./models/User');
 const Item = require('./models/Item');
 const Bid = require('./models/Bid');
+const { Socket } = require("dgram");
 
 
 app.get("/", function(request, response) {
   response.sendFile(__dirname + "/dist/index.html")
+});
+
+app.get("/stats", (req, res) => {
+  Item.find({}, (err, items) => res.json(items));
 });
 
 
@@ -57,8 +72,6 @@ const createBid = (itemID, bidder, amount) => {
     }).catch(err=>{ if(err) return console.log(err) });
   });
 }
-  
-
 
 io.on("connection", function(client) {
 
@@ -92,19 +105,10 @@ io.on("connection", function(client) {
   });
 });
 
-if (production) {
-  glx.init({
-    packageRoot: __dirname,
-    configDir: "./greenlock.d",
-    maintainerEmail: "ike@holzmann.io",
-    cluster: false
-  }).serve(app); // serve on 80 & 443
-} else {
-  server.listen(8080, function(error) {
-    if (error) {
-      console.error(error);
-    } else {
-      console.info("==> 🌎  Server listening");
-    }
-  });
-}
+server.listen(PORT, function(error) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.info("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
+  }
+});
