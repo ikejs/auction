@@ -20,7 +20,8 @@ require("greenlock-express")
 mongoose.connect(process.env.MONGODB_URI||"mongodb://localhost:27017/auction", {
   useNewUrlParser: true,
   useFindAndModify: false,
-  useCreateIndex: true
+  useCreateIndex: true,
+  useUnifiedTopology: true
 });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
