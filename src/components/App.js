@@ -13,7 +13,7 @@ import Moment from 'react-moment';
 
 
 
-let socket = io.connect();
+let socket = io.connect(`https://127.0.0.1`);
 
 const App = () => {
 

@@ -8,12 +8,19 @@ const io = require("socket.io")(server);
 const mongoose = require("mongoose");
 const ObjectId = require("mongodb").ObjectID;
 
+require("greenlock-express")
+    .init({
+        packageRoot: __dirname,
+        configDir: "./greenlock.d",
+        maintainerEmail: "ike@holzmann.io",
+        cluster: false
+    }).serve(app); // listen on 80 & 443
+
 // connect to db
 mongoose.connect(process.env.MONGODB_URI||"mongodb://localhost:27017/auction", {
   useNewUrlParser: true,
   useFindAndModify: false,
-  useCreateIndex: true,
-  useUnifiedTopology: true
+  useCreateIndex: true
 });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -39,8 +46,6 @@ app.use(express.static(path.join(__dirname, "public")));
 const User = require('./models/User');
 const Item = require('./models/Item');
 const Bid = require('./models/Bid');
-const { Socket } = require("dgram");
-
 
 app.get("/", function(request, response) {
   response.sendFile(__dirname + "/dist/index.html")
@@ -87,8 +92,8 @@ io.on("connection", function(client) {
 
   client.on("bid", function({ user, itemID, amount }) {
 
-    if (user.email === null) {
-      client.emit("err", { msg: "Error! Please refresh and try again." })
+    if ((user.email === null) || (user.email == "")) {
+      return client.emit("err", { msg: "Error! Please refresh and try again." })
     }
 
 
@@ -102,7 +107,10 @@ io.on("connection", function(client) {
         createBid(itemID, existingUser, amount);
       }
     });
+
   });
+
+
 });
 
 server.listen(PORT, function(error) {
