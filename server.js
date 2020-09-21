@@ -3,7 +3,7 @@ require('dotenv').config({ path: ".env" });
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 8080;
-const server = require("http").createServer(app);
+const server = require("https").createServer(app);
 const io = require("socket.io")(server);
 const mongoose = require("mongoose");
 const ObjectId = require("mongodb").ObjectID;
