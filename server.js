@@ -12,7 +12,8 @@ const ObjectId = require("mongodb").ObjectID;
 mongoose.connect(process.env.MONGODB_URI||"mongodb://localhost:27017/auction", {
   useNewUrlParser: true,
   useFindAndModify: false,
-  useCreateIndex: true
+  useCreateIndex: true,
+  useUnifiedTopology: true
 });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -101,13 +102,23 @@ io.on("connection", function(client) {
         createBid(itemID, existingUser, amount);
       }
     });
-
-
   });
-
-
-
 });
+
+require("greenlock-express")
+  .init({
+    packageRoot: __dirname,
+    configDir: "./greenlock.d",
+
+    // contact for security and critical bug notices
+    maintainerEmail: "ike@holzmann.io",
+
+    // whether or not to run at cloudscale
+    cluster: false
+  })
+  // Serves on 80 and 443
+  // Get's SSL certificates magically!
+  .serve(app);
 
 server.listen(PORT, function(error) {
   if (error) {
