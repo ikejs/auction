@@ -9,7 +9,7 @@ const mongoose = require("mongoose");
 const ObjectId = require("mongodb").ObjectID;
 
 // connect to db
-mongoose.connect("mongodb://localhost:27017/auction", {
+mongoose.connect(process.env.MONGODB_URI||"mongodb://localhost:27017/auction", {
   useNewUrlParser: true,
   useFindAndModify: false,
   useCreateIndex: true
