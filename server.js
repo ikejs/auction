@@ -120,10 +120,10 @@ require("greenlock-express")
   // Get's SSL certificates magically!
   .serve(app);
 
-server.listen(PORT, function(error) {
+server.listen(8080, function(error) {
   if (error) {
     console.error(error);
   } else {
-    console.info("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
+    console.info("==> 🌎  Server listening");
   }
 });
