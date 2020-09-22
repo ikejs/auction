@@ -13,7 +13,7 @@ import Moment from 'react-moment';
 
 
 
-let socket = io.connect('https://localhost', {secure: true});
+let socket = io.connect();
 
 const App = () => {
 
