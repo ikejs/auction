@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Logos from "./Logos";
+import Footer from "./Footer";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -177,6 +178,7 @@ const App = () => {
             )
           }) 
         }
+        <Footer />
       </div>
     </div>
   )
