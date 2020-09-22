@@ -93,7 +93,7 @@ const App = () => {
         </Dialog>
       </div>
       <Logos />
-      <div className="mt-3 col-md-10 offset-md-1 d-flex justify-content-center">
+      <div className="mt-3 col-md-10 offset-md-1 d-flex justify-content-center row">
         {
           items.map((item, i) => { 
             const currentBid = Math.max.apply(Math, item.bids.map((o) => o.amount));
