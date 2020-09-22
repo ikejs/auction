@@ -9,6 +9,7 @@
     "dev": "nodemon server.js",
     "postinstall": "webpack -p --config webpack.prod.config.js"
   },
+  "homepage": "https://auction.ike.dev",
   "author": "",
   "license": "ISC",
   "dependencies": {
