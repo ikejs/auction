@@ -5,33 +5,6 @@ const app = express();
 const mongoose = require("mongoose");
 const ObjectId = require("mongodb").ObjectID;
 
-// connect to db
-mongoose.connect(process.env.MONGODB_URI||"mongodb://localhost:27017/auction", {
-  useNewUrlParser: true,
-  useFindAndModify: false,
-  useCreateIndex: true,
-  useUnifiedTopology: true
-});
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", function() {
-  console.log("database connected")
-});
-
-app.use(express.static(path.join(__dirname, "dist")));
-app.use(express.static(path.join(__dirname, "public")));
-
-const User = require('./models/User');
-const Item = require('./models/Item');
-const Bid = require('./models/Bid');
-
-app.get("/", function(request, response) {
-  response.sendFile(__dirname + "/dist/index.html")
-});
-
-app.get("/stats", (req, res) => {
-  Item.find({}, (err, items) => res.json(items));
-});
 
 require("greenlock-express")
     .init({
@@ -42,10 +15,37 @@ require("greenlock-express")
     }).ready((glx) => {
       const socketio = require("socket.io");
       let io;
-
       const server = glx.httpsServer();
-
       io=socketio(server);
+
+
+      // connect to db
+      mongoose.connect(process.env.MONGODB_URI||"mongodb://localhost:27017/auction", {
+        useNewUrlParser: true,
+        useFindAndModify: false,
+        useCreateIndex: true,
+        useUnifiedTopology: true
+      });
+      const db = mongoose.connection;
+      db.on("error", console.error.bind(console, "connection error:"));
+      db.once("open", function() {
+        console.log("database connected")
+      });
+
+      app.use(express.static(path.join(__dirname, "dist")));
+      app.use(express.static(path.join(__dirname, "public")));
+
+      const User = require('./models/User');
+      const Item = require('./models/Item');
+      const Bid = require('./models/Bid');
+
+      app.get("/", function(request, response) {
+        response.sendFile(__dirname + "/dist/index.html")
+      });
+
+      app.get("/stats", (req, res) => {
+        Item.find({}, (err, items) => res.json(items));
+      });
 
       const createBid = (itemID, bidder, amount) => {
         const newBid = new Bid({
