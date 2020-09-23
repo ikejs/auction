@@ -53,8 +53,7 @@ const App = () => {
           {/* <DialogTitle id="form-dialog-title">Confirm information</DialogTitle> */}
           <DialogContent>
             <DialogContentText>
-              {/* To subscribe to this website, please enter your email address here. We will send updates
-              occasionally. */}
+              This auction will NOT share any of your information online.
             </DialogContentText>
             <TextField
               autoFocus
