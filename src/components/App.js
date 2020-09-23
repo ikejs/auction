@@ -121,9 +121,6 @@ const App = () => {
                     <div className="col-md-4 float-right">
                       <div className="input-group">
                         <input type="number" className="form-control" 
-                          placeholder={
-                            item.bids.length ? currentBid + 10 : 0
-                          }
                           onChange={e => {
                             bidInputs[i] = e.target.value;
                             setBidInputs(bidInputs);
