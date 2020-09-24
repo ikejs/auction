@@ -19,6 +19,7 @@ let socket = io.connect({ secure: true });
 const App = () => {
 
   const [items, setItems] = useState([]);
+  const [finishedDialogOpen, setFinishedDialogOpen] = useState(true);
   const [userInputsDialogOpen, setUserInputsDialogOpen] = useState(true);
   const [user, setUser] = useState({});
   const [bidInputs, setBidInputs] = useState([]);
@@ -43,6 +44,18 @@ const App = () => {
   return (
     <div style={{ backgroundImage: "url('/images/bg.jpg')" }}>
       <div>
+      <Dialog 
+          aria-labelledby="form-dialog-title"
+          open={finishedDialogOpen} 
+          disableBackdropClick={true}
+          disableEscapeKeyDown={true}
+        >
+          <DialogContent>
+            <DialogContentText>
+              This auction is now complete!
+            </DialogContentText>
+          </DialogContent>
+        </Dialog>
         <Dialog 
           aria-labelledby="form-dialog-title"
           open={userInputsDialogOpen} 
