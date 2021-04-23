@@ -8,10 +8,10 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 // import DialogTitle from '@material-ui/core/DialogTitle';
-import censorEmail from '../helpers/censorEmail.js';
-import CurrencyFormat from 'react-currency-format';
 import Moment from 'react-moment';
-
+import CurrencyFormat from 'react-currency-format';
+import useSound from 'use-sound';
+import censorEmail from '../helpers/censorEmail.js';
 
 
 let socket = io.connect({ secure: true });
@@ -22,12 +22,14 @@ const App = () => {
   const [userInputsDialogOpen, setUserInputsDialogOpen] = useState(true);
   const [user, setUser] = useState({});
   const [bidInputs, setBidInputs] = useState([]);
+  const [play] = useSound('sounds/bid-sound.mp3');
 
   const sendBid = (itemID, amount) => {
     if(!user.email.length) {
       setUserInputsDialogOpen(true);
     } else {
       socket.emit('bid', { user, itemID, amount });
+      play();
     }
   };
 

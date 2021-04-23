@@ -38,6 +38,7 @@
     "sass-loader": "^3.2.0",
     "socket.io": "^1.4.6",
     "style-loader": "^0.13.1",
+    "use-sound": "^2.0.2",
     "webpack": "^1.12.14"
   },
   "devDependencies": {
