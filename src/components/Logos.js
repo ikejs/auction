@@ -3,7 +3,8 @@ import React from "react";
 const Logos = () => {
   return (
     <div>
-      <nav className="navbar navbar-custom navbar-static-top bg-white">
+      <img className="w-100" src="/images/eaa-header.jpg" />
+      {/* <nav className="navbar navbar-custom navbar-static-top bg-white">
         <div className="row">
           <div className="col-xs-12 d-flex justify-content-center">
             <img className="col-md-1 align-self-center" src="/images/therock.png" style={{ maxHeight: "100px" }} />
@@ -11,7 +12,7 @@ const Logos = () => {
             <img className="col-md-1 align-self-center" src="/images/sunny.png" style={{ maxHeight: "100px" }} />
           </div>
         </div>
-      </nav>
+      </nav> */}
     </div>
   )
 }

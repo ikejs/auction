@@ -43,7 +43,10 @@ const App = () => {
   });
 
   return (
-    <div style={{ backgroundImage: "url('/images/bg.jpg')" }}>
+    <div style={{ 
+      // backgroundImage: "url('/images/bg.jpg')" 
+      backgroundColor: "#1A244F",
+    }}>
       <div>
         <Dialog 
           aria-labelledby="form-dialog-title"
@@ -95,7 +98,7 @@ const App = () => {
         </Dialog>
       </div>
       <Logos />
-      <div className="mt-3 col-md-10 offset-md-1 d-flex justify-content-center row">
+      <div className="mt-4 col-md-10 offset-md-1 d-flex justify-content-center row">
         {
           items.map((item, i) => { 
             const currentBid = Math.max.apply(Math, item.bids.map((o) => o.amount));
