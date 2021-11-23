@@ -26,8 +26,8 @@ function onReady(server) {
     console.log("database connected")
   });
 
-  app.use(express.static(path.join(__dirname, "dist")));
-  app.use(express.static(path.join(__dirname, "public")));
+  // app.use(express.static(path.join(__dirname, "dist")));
+  // app.use(express.static(path.join(__dirname, "public")));
 
   const User = require('./models/User');
   const Item = require('./models/Item');
