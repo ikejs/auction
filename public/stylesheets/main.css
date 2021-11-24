@@ -3,3 +3,7 @@ h1 {
   font-weight: 200;
   color: orange;
 }
+
+.shadow {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}

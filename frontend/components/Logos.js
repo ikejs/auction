@@ -2,11 +2,8 @@ import React from "react";
 
 const Logos = () => {
   return (
-    <div className="col-md-10 offset-md-1">
-      {/* <img className="w-100" src="/images/eaa-header.jpg" /> */}
-      <a href="https://www.fdlymca.org/calling-community-for-a-cause.html">
-        <img src="/images/ymca-logo.jpeg" style={{ maxHeight: "70px", margin: "30px" }} />
-      </a>
+    <div>
+      <img className="w-100" src="/images/eaa-header.jpg" />
       {/* <nav className="navbar navbar-custom navbar-static-top bg-white">
         <div className="row">
           <div className="col-xs-12 d-flex justify-content-center">

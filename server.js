@@ -26,16 +26,16 @@ function onReady(server) {
     console.log("database connected")
   });
 
-  // app.use(express.static(path.join(__dirname, "dist")));
-  // app.use(express.static(path.join(__dirname, "public")));
+  app.use(express.static(path.join(__dirname, "dist")));
+  app.use(express.static(path.join(__dirname, "public")));
 
   const User = require('./models/User');
   const Item = require('./models/Item');
   const Bid = require('./models/Bid');
 
-  // app.get("/", function(request, response) {
-  //   response.sendFile(__dirname + "/dist/index.html")
-  // });
+  app.get("/", function(request, response) {
+    response.sendFile(__dirname + "/dist/index.html")
+  });
 
   app.get("/stats", (req, res) => {
     Item.find({}, (err, items) => res.json(items));

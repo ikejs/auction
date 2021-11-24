@@ -45,7 +45,7 @@ const App = () => {
   return (
     <div style={{ 
       // backgroundImage: "url('/images/bg.jpg')" 
-      backgroundColor: "#1A244F",
+      backgroundColor: "#FFFFF",
     }}>
       <div>
         <Dialog 
@@ -103,17 +103,17 @@ const App = () => {
           items.map((item, i) => { 
             const currentBid = Math.max.apply(Math, item.bids.map((o) => o.amount));
             return(
-              <div key={i} className="col-md-5 card rounded text-center m-4 p-0">
+              <div key={i} className="col-md-5 card text-center m-4 p-0 shadow">
                 <div className="w-100" style={{ position:"relative", display:"inlineBlock" }}>
                   {item.bids.length ? 
-                    <span style={{position: "absolute",bottom: "0",background: "red",textAlign: "center",borderRadius: "0 10px 0 0",color: "white",padding: "5px 10px",fontSize: "20px",zIndex: "10"}}
+                    <span style={{position: "absolute",bottom: "0",background: "#221F20",textAlign: "center",borderRadius: "0 10px 0 0",color: "white",padding: "5px 10px",fontSize: "20px",zIndex: "10"}}
                       >Current bid: <strong>
                         <CurrencyFormat value={currentBid} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                       </strong>
                     </span>
                     : ""
                   }
-                  <img src={`/images/${item.image}`} className="w-100" style={{ position: "relative" }} />
+                  <img src={`/images/${item.image}`} className="w-100" style={{ position: "relative", zIndex: 0, borderTopLeftRadius: 6, borderTopRightRadius: 6 }} />
                 </div>
                 <div className="m-3 text-left">
                   <div className="row d-flex align-items-center">
@@ -130,7 +130,7 @@ const App = () => {
                             setBidInputs(bidInputs);
                           }} />
                         <div className="input-group-append">
-                          <button className="btn btn-success" type="button" onClick={() => {
+                          <button className="btn" style={{ backgroundColor: "#92278F", color: "white", fontWeight: "bold" }} type="button" onClick={() => {
                             if (!bidInputs[i].length) return false;
                             if (bidInputs[i] % 1 != 0) return alert("Whole numbers only");
                             if (!item.bids.length && bidInputs[i] < 10 || parseInt(bidInputs[i] + 10) < bidInputs[i]) {
@@ -153,7 +153,7 @@ const App = () => {
                     <div>
                       <hr />
                       <p className="lead m-0 p-0">Bids</p>
-                      <div style={{ overflowY: "scroll", height: "300px" }}>
+                      <div style={{ overflowY: "scroll", height: "200px" }}>
                         <table className="table table-sm">
                           <tbody>
                             {
@@ -172,7 +172,7 @@ const App = () => {
                         </table>
                       </div>
                     </div>
-                    : ""
+                    : "No bids yet"
                   }
                 </div>
               </div>
