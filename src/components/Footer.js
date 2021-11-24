@@ -11,7 +11,7 @@ const Footer = () => {
         textAlign: "center"
       }}
     >
-      <p><small>Developed by <a style={{color: "grey"}} href="https://ike.dev">Ike Holzmann</a> @ <a style={{color: "grey"}} href="https://radioplusinfo.com/" rel="noopener noreferrer">Radio Plus, Inc.</a></small></p>
+      <p><small>Developed by <a style={{color: "grey"}} href="https://radioplusinfo.com/" rel="noopener noreferrer">Radio Plus, Inc.</a></small></p>
     </div>
   )
 }
