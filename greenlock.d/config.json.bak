@@ -1,9 +1,9 @@
 {
   "sites": [
     {
-      "subject": "api.auction.ike.dev",
+      "subject": "auction.ike.dev",
       "altnames": [
-        "api.auction.ike.dev"
+        "auction.ike.dev"
       ],
       "renewAt": 1
     }
