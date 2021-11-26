@@ -11,7 +11,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import Moment from 'react-moment';
 import CurrencyFormat from 'react-currency-format';
 import useSound from 'use-sound';
-import censorEmail from '../helpers/censorEmail.js';
+import validateUser from '../helpers/validateUser';
+import censorEmail from '../helpers/censorEmail';
 
 
 let socket = io.connect({ secure: true });
@@ -20,9 +21,27 @@ const App = () => {
 
   const [items, setItems] = useState([]);
   const [userInputsDialogOpen, setUserInputsDialogOpen] = useState(true);
+  const [userInputs, setUserInputs] = useState({});
   const [user, setUser] = useState({});
   const [bidInputs, setBidInputs] = useState([]);
   const [play] = useSound('sounds/bid-sound.mp3');
+
+
+  const handleUserInputChange = ({ target: { name, value } }) => {
+    setUserInputs((current) => {
+      return {
+        ...current,
+        [name]: value
+      }
+    })
+  }
+
+  const handleSubmitJoinAuction = () => {
+    const user = validateUser(userInputs)
+    if(user.error) { return alert(user.error) }
+    setUser(user)
+    setUserInputsDialogOpen(false)
+  }
 
   const sendBid = (itemID, amount) => {
     if(!user.email.length) {
@@ -63,35 +82,34 @@ const App = () => {
             <TextField
               autoFocus
               margin="dense"
-              id="name"
+              name="name"
               label="Name"
               type="text"
-              onChange={(e) => setUser(user => { user.name = e.target.value; return user; })}
+              onChange={handleUserInputChange}
               fullWidth
             />
             <TextField
               margin="dense"
-              id="email"
+              name="email"
               label="Email Address"
               type="email"
-              onChange={(e) => setUser(user => { user.email = e.target.value; return user; })}
+              onChange={handleUserInputChange}
               fullWidth
             />
             <TextField
               margin="dense"
-              id="phone"
+              name="phone"
               label="Phone number"
               type="tel"
-              onChange={(e) => setUser(user => { user.phone = e.target.value; return user; })}
+              onChange={handleUserInputChange}
               fullWidth
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={()=> {
-              if(user.name.length && user.email.length && user.phone.length) {
-                setUserInputsDialogOpen(false);
-              }
-              }} color="primary">
+            <Button 
+              onClick={handleSubmitJoinAuction}
+              color="primary"
+            >
               Enter Auction
             </Button>
           </DialogActions>
