@@ -7,6 +7,8 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const ObjectId = require("mongodb").ObjectID;
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 const PORT = 4000;
 
@@ -41,6 +43,34 @@ function onReady(server) {
     Item.find({}, (err, items) => res.json(items));
   });
 
+
+  const sendConfirmationEmail = ({ bidder, bid, item, items }) => {  
+    const msg = {
+      to: bidder.email,
+      from: 'auction@ike.dev',
+      subject: 'Bid Confirmation - Radio Plus Auctions',
+      templateId: 'd-782e9a81690d44b699a15c06d8ab542d',
+      dynamicTemplateData: {
+        bid,
+        item,
+        items: items.map((item) => ({
+          ...item,
+          highestBid: item.bids[item.bids.length - 1].amount
+        }))
+      }
+    }
+    sgMail
+      .send(msg)
+      .then((response) => {
+        console.log(response[0].statusCode)
+        console.log(response[0].headers)
+      })
+      .catch((error) => {
+        console.error(error)
+    })
+  }
+
+
   const createBid = (itemID, bidder, amount) => {
     const newBid = new Bid({
       bidder: ObjectId(bidder._id),
@@ -50,19 +80,27 @@ function onReady(server) {
       Item.findOne({ _id: ObjectId(itemID) }, (err, item) => {
         item.bids.push(ObjectId(bid._id));
         item.save().then(() => {
-          Item.find({}, (err, items) => io.emit("update", items))
-            .populate({ 
+          Item.find({}, (err, items) => {
+            io.emit("update", items)
+            sendConfirmationEmail({ 
+              bidder,
+              bid,
+              item,
+              items
+            })
+          }).populate({ 
               path: 'bids',
               populate: {
                 path: 'bidder',
                 model: 'User'
               }
-            });
+            }).lean()
         });
       }).catch(err=>{ if(err) return console.log(err) });
     });
   }
   
+
   io.on("connection", function(client) {
     Item.find({}, (err, items) => client.emit("update", items))
       .populate({ 
@@ -95,6 +133,7 @@ function onReady(server) {
   });
 
 }
+
 
 if (process.env.NODE_ENV === 'production') {
   const greenlockServer = greenlock.init({
