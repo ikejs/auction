@@ -115,6 +115,19 @@ const App = () => {
           </DialogActions>
         </Dialog>
       </div>
+      {
+        user.name && (
+          <div className="col-md-12 p-1 sticky-top bg-dark text-white text-center">
+            <p className="lead">Bidding as</p>
+            <div className="d-flex justify-content-center">
+              <p className="px-2">{user.name}</p>
+              <p className="px-2">{user.email}</p>
+              <p className="px-2">{user.phone}</p>
+            </div>
+            <a href="/" className="text-white"><small><u>change</u></small></a>
+          </div>
+          )
+      }
       <Logos />
       <div className="mt-4 col-md-10 offset-md-1 d-flex justify-content-center row">
         {
@@ -135,11 +148,12 @@ const App = () => {
                 </div>
                 <div className="m-3 text-left">
                   <div className="row d-flex align-items-center">
-                    <div className="col-md-8 float-left">
+                  {/* REMOVE NAME/DESCRIPTION FOR YMCA AUCTION */}
+                    {/* <div className="col-md-8 float-left">
                       <h4 className="mt-2 mb-0 pb-0">{item.name}</h4>
                       <p className="lead text-muted mt-0 pt-0"><strong>{item.name2}</strong></p>
                       <p><small>{item.description}</small></p>
-                    </div>
+                    </div> */}
                     <div className="col-md-4 float-right">
                       <div className="input-group">
                         <input type="number" className="form-control" 
