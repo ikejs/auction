@@ -70,6 +70,34 @@ function onReady(server) {
     })
   }
 
+  const sendOutbidEmail = ({ lastBidder, item, items }) => {
+    const msg = {
+      to: lastBidder.email,
+      from: 'auction@ike.dev',
+      subject: 'OUTBID - Radio Plus Auctions',
+      templateId: 'd-d8db5855a62c4cefb5584edc78609177',
+      dynamicTemplateData: {
+        item: {
+          ...item,
+          highestBid: item.bids[item.bids.length - 1].amount
+        },
+        items: items.map((item) => ({
+          ...item,
+          highestBid: item.bids[item.bids.length - 1].amount
+        }))
+      }
+    }
+    sgMail
+      .send(msg)
+      .then((response) => {
+        console.log(response[0].statusCode)
+        console.log(response[0].headers)
+      })
+      .catch((error) => {
+        console.error(error)
+    })
+  }
+
 
   const createBid = (itemID, bidder, amount) => {
     const newBid = new Bid({
@@ -88,6 +116,23 @@ function onReady(server) {
               item,
               items
             })
+
+            const lastBidID = item.bids.reverse()[1] || item.bids.reverse()[0]
+
+            if (lastBidID) { // if someone has been outbid...
+              
+              Bid.findOne({_id: ObjectId(lastBidID)}, (err, lastBid) => {
+                if (err) { return console.log(err) }
+                const lastBidder = lastBid.bidder
+                if (bidder._id.toString() != lastBidder?._id.toString()) {
+                  sendOutbidEmail({
+                    lastBidder,
+                    item,
+                    items
+                  })
+                }
+              }).populate('bidder');
+            }
           }).populate({ 
               path: 'bids',
               populate: {
