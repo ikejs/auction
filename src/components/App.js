@@ -20,7 +20,7 @@ let socket = io.connect({ secure: true });
 const App = () => {
 
   const [items, setItems] = useState([]);
-  const [userInputsDialogOpen, setUserInputsDialogOpen] = useState(true);
+  const [userInputsDialogOpen, setUserInputsDialogOpen] = useState(false); // FALSE FOR AUCTION END
   const [userInputs, setUserInputs] = useState({});
   const [user, setUser] = useState({});
   const [bidInputs, setBidInputs] = useState([]);
