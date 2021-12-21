@@ -20,7 +20,7 @@ let socket = io.connect({ secure: true });
 const App = () => {
 
   const [items, setItems] = useState([]);
-  const [userInputsDialogOpen, setUserInputsDialogOpen] = useState(false); // FALSE FOR AUCTION END
+  const [userInputsDialogOpen, setUserInputsDialogOpen] = useState(true);
   const [userInputs, setUserInputs] = useState({});
   const [user, setUser] = useState({});
   const [bidInputs, setBidInputs] = useState([]);
@@ -117,7 +117,7 @@ const App = () => {
       </div>
       {
         user.name && (
-          <div className="col-md-12 p-1 sticky-top bg-dark text-white text-center">
+          <div className="col-md-12 p-1 sticky-top text-white text-center" style={{ backgroundColor: "#235E6F" }}>
             <p className="lead">Bidding as</p>
             <div className="d-flex justify-content-center">
               <p className="px-2">{user.name}</p>
@@ -138,7 +138,7 @@ const App = () => {
                 <div className="w-100" style={{ position:"relative", display:"inlineBlock" }}>
                   {item.bids.length ? 
                     <span style={{position: "absolute",bottom: "0",background: "#221F20",textAlign: "center",borderRadius: "0 10px 0 0",color: "white",padding: "5px 10px",fontSize: "20px",zIndex: "10"}}
-                      >FINAL BID: <strong>
+                      >CURRENT BID: <strong>
                         <CurrencyFormat value={currentBid} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                       </strong>
                     </span>
@@ -148,14 +148,12 @@ const App = () => {
                 </div>
                 <div className="m-3 text-left">
                   <div className="row d-flex align-items-center">
-                  {/* REMOVE NAME/DESCRIPTION FOR YMCA AUCTION */}
-                    {/* <div className="col-md-8 float-left">
+                    <div className="col-md-8 float-left">
                       <h4 className="mt-2 mb-0 pb-0">{item.name}</h4>
                       <p className="lead text-muted mt-0 pt-0"><strong>{item.name2}</strong></p>
                       <p><small>{item.description}</small></p>
-                    </div> */}
-                    {/* REMOVE INPUT FOR AUCTION END */}
-                    {/* <div className="col-md-4 float-right">
+                    </div>
+                    <div className="col-md-4 float-right">
                       <div className="input-group">
                         <input type="number" className="form-control" 
                           onChange={e => {
@@ -163,14 +161,14 @@ const App = () => {
                             setBidInputs(bidInputs);
                           }} />
                         <div className="input-group-append">
-                          <button className="btn" style={{ backgroundColor: "#92278F", color: "white", fontWeight: "bold" }} type="button" onClick={() => {
+                          <button className="btn" style={{ backgroundColor: "#CC231E", color: "white", fontWeight: "bold" }} type="button" onClick={() => {
                             if (!bidInputs[i].length) return false;
                             if (bidInputs[i] % 1 != 0) return alert("Whole numbers only");
-                            if (!item.bids.length && bidInputs[i] < 10 || parseInt(bidInputs[i] + 10) < bidInputs[i]) {
-                              return alert("Your bid must be $10 or more.")
+                            if (!item.bids.length && bidInputs[i] < 20 || parseInt(bidInputs[i] + 20) < bidInputs[i]) {
+                              return alert("Your bid must be $20 or more.")
                             }
-                            if (item.bids.length && currentBid + 10 > bidInputs[i]) {
-                              return alert("Your bid must be at least $10 higher than the current bid.")
+                            if (item.bids.length && currentBid + 20 > bidInputs[i]) {
+                              return alert("Your bid must be at least $20 higher than the current bid.")
                             }
                             if ((parseInt(bidInputs[i]) <= 0) || (parseInt(bidInputs[i]) <= currentBid)) {
                               return alert("Your bid must be higher than the current bid.")
@@ -180,7 +178,7 @@ const App = () => {
                           }}>Bid</button>
                         </div>
                       </div>
-                    </div> */}
+                    </div>
                   </div>
                   {item.bids.length ?
                     <div>

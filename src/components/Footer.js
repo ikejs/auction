@@ -7,11 +7,11 @@ const Footer = () => {
       style={{
         left: 0,
         bottom: 0,
-        color: "grey",
+        color: "white",
         textAlign: "center"
       }}
     >
-      <p><small>Developed by <a style={{color: "grey"}} href="https://radioplusinfo.com/" rel="noopener noreferrer">Radio Plus, Inc.</a></small></p>
+      <p><small>Auction by <a style={{color: "white", fontWeight: 'bold'}} href="https://radioplusinfo.com/" rel="noopener noreferrer">Radio Plus, Inc.</a></small></p>
     </div>
   )
 }
