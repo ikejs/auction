@@ -117,18 +117,22 @@ const App = () => {
       </div>
       {
         user.name && (
-          <div className="col-md-12 p-1 sticky-top text-white text-center" style={{ backgroundColor: "#235E6F" }}>
-            <p className="lead">Bidding as</p>
-            <div className="d-flex justify-content-center">
-              <p className="px-2">{user.name}</p>
-              <p className="px-2">{user.email}</p>
-              <p className="px-2">{user.phone}</p>
+          <div className="w-100 p-1 sticky-top text-white text-center" style={{ backgroundColor: "#235E6F" }}>
+            <p className="h6 mb-0">Bidding as</p>
+            <div className="d-flex justify-content-center pb-0 mb-0">
+              <p className="px-2 mb-0">{user.name}</p>
+              <p className="px-2 mb-0">{user.email}</p>
+              <p className="px-2 mb-0">{user.phone}</p>
             </div>
-            <a href="/" className="text-white"><small><u>change</u></small></a>
+            <a href="/" className="text-white pt-0 mt-0"><small><u>change</u></small></a>
           </div>
           )
       }
       <Logos />
+      <div className="col-md-10 offset-md-1 px-4">
+        <p className="text-muted h6">Auction ends <strong>January 10th at 12pm</strong></p>
+        <p className="text-muted"><small>Bids must be {'>'}$20 higher than the current bid.</small></p>
+      </div>
       <div className="mt-4 col-md-10 offset-md-1 d-flex justify-content-center row">
         {
           items.map((item, i) => { 
@@ -138,7 +142,7 @@ const App = () => {
                 <div className="w-100" style={{ position:"relative", display:"inlineBlock" }}>
                   {item.bids.length ? 
                     <span style={{position: "absolute",bottom: "0",background: "#221F20",textAlign: "center",borderRadius: "0 10px 0 0",color: "white",padding: "5px 10px",fontSize: "20px",zIndex: "10"}}
-                      >CURRENT BID: <strong>
+                      >Current Bid: <strong>
                         <CurrencyFormat value={currentBid} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                       </strong>
                     </span>
