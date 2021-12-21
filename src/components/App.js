@@ -130,7 +130,7 @@ const App = () => {
       }
       <Logos />
       <div className="col-md-10 offset-md-1 px-4">
-        <p className="text-muted h6">Auction ends <strong>January 10th at 12pm</strong></p>
+        <p className="text-muted h6">Auction ends <strong>December 27th at 3pm</strong></p>
         <p className="text-muted"><small>Bids must be {'≥'}$20 higher than the current bid.</small></p>
       </div>
       <div className="mt-4 col-md-10 offset-md-1 d-flex justify-content-center row">
