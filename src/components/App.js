@@ -20,7 +20,7 @@ let socket = io.connect({ secure: true });
 const App = () => {
 
   const [items, setItems] = useState([]);
-  const [userInputsDialogOpen, setUserInputsDialogOpen] = useState(true);
+  const [userInputsDialogOpen, setUserInputsDialogOpen] = useState(false); // TEMP FOR AUCTION CLOSE
   const [userInputs, setUserInputs] = useState({});
   const [user, setUser] = useState({});
   const [bidInputs, setBidInputs] = useState([]);
@@ -130,8 +130,8 @@ const App = () => {
       }
       <Logos />
       <div className="col-md-10 offset-md-1 px-4">
-        <p className="text-muted h6">Auction ends <strong>December 27th at 3pm</strong></p>
-        <p className="text-muted"><small>Bids must be {'≥'}$20 higher than the current bid.</small></p>
+        <p className="text-muted h6">Auction completed.</p>
+        {/* <p className="text-muted"><small>Bids must be {'≥'}$20 higher than the current bid.</small></p> */}
       </div>
       <div className="mt-4 col-md-10 offset-md-1 d-flex justify-content-center row">
         {
@@ -157,7 +157,7 @@ const App = () => {
                       <p className="lead text-muted mt-0 pt-0"><strong>{item.name2}</strong></p>
                       <p><small>{item.description}</small></p>
                     </div>
-                    <div className="col-md-4 float-right">
+                    {/* <div className="col-md-4 float-right">
                       <div className="input-group">
                         <input type="number" className="form-control" 
                           onChange={e => {
@@ -182,7 +182,7 @@ const App = () => {
                           }}>Bid</button>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                   {item.bids.length ?
                     <div>
