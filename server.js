@@ -55,7 +55,7 @@ function onReady(server) {
         item,
         items: items.map((item) => ({
           ...item,
-          highestBid: item.bids[item.bids.length - 1].amount
+          highestBid: item.bids[item.bids.length - 1]?.amount
         }))
       }
     }
@@ -159,23 +159,23 @@ function onReady(server) {
   
     client.on("bid", function({ user, itemID, amount }) {
   
-      // if ((user.email === null) || (user.email == "")) {
-      //   return client.emit("err", { msg: "Error! Please refresh and try again." })
-      // }
+      if ((user.email === null) || (user.email == "")) {
+        return client.emit("err", { msg: "Error! Please refresh and try again." })
+      }
   
   
-      // User.findOne({ email: user.email }, (err, existingUser) => {
-      //   if (!existingUser) {
-      //     const newUser = new User(user);
-      //     newUser.save().then((bidder) => {
-      //       createBid(itemID, bidder, amount);
-      //     }).catch(err=>{ if(err) return console.log(err) });
-      //   } else {
-      //     createBid(itemID, existingUser, amount);
-      //   }
-      // });
+      User.findOne({ email: user.email }, (err, existingUser) => {
+        if (!existingUser) {
+          const newUser = new User(user);
+          newUser.save().then((bidder) => {
+            createBid(itemID, bidder, amount);
+          }).catch(err=>{ if(err) return console.log(err) });
+        } else {
+          createBid(itemID, existingUser, amount);
+        }
+      });
 
-      console.log('bidding is closed')
+      // console.log('bidding is closed')
     });
   });
 
