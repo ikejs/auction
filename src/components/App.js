@@ -20,7 +20,7 @@ let socket = io.connect({ secure: true });
 const App = () => {
 
   const [items, setItems] = useState([]);
-  const [userInputsDialogOpen, setUserInputsDialogOpen] = useState(true); // TO CLOSE AUCTION, FALSE
+  const [userInputsDialogOpen, setUserInputsDialogOpen] = useState(false); // TO CLOSE AUCTION, FALSE
   const [userInputs, setUserInputs] = useState({});
   const [user, setUser] = useState({});
   const [bidInputs, setBidInputs] = useState([]);
@@ -134,7 +134,7 @@ const App = () => {
 
       {/* <Logos /> */}
       {/* <div className="col-md-10 offset-md-1 px-4"> */}
-        {/* <p className="text-muted h6">Auction completed.</p> */}
+        <p className="text-muted h6">Auction completed.</p>
         {/* <p className="text-muted"><small>Bids must be {'≥'}$20 higher than the current bid.</small></p> */}
       {/* </div> */}
       <div className="col-md-10 offset-md-1">
@@ -150,7 +150,7 @@ const App = () => {
                   <div className="w-100" style={{ position:"relative", display:"inlineBlock" }}>
                     {item.bids.length ? 
                       <span style={{position: "absolute",bottom: "0",background: "#221F20",textAlign: "center",borderRadius: "0 10px 0 0",color: "white",padding: "5px 10px",fontSize: "20px",zIndex: "10"}}
-                        >Current Bid: <strong>
+                        >Final Bid: <strong>
                           <CurrencyFormat value={currentBid} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                         </strong>
                       </span>
@@ -165,7 +165,7 @@ const App = () => {
                         <p className="lead text-muted mt-0 pt-0"><strong>{item.name2}</strong></p>
                         <p><small>{item.description}</small></p>
                       </div>
-                      <div className="col-md-4 float-right">
+                      {/* <div className="col-md-4 float-right">
                         <div className="input-group">
                           <input type="number" className="form-control" placeholder="0" 
                             onChange={e => {
@@ -190,7 +190,7 @@ const App = () => {
                             }}>Bid</button>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                     {item.bids.length ?
                       <div>
