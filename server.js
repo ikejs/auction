@@ -164,16 +164,16 @@ function onReady(server) {
       }
   
   
-      User.findOne({ email: user.email }, (err, existingUser) => {
-        if (!existingUser) {
-          const newUser = new User(user);
-          newUser.save().then((bidder) => {
-            createBid(itemID, bidder, amount);
-          }).catch(err=>{ if(err) return console.log(err) });
-        } else {
-          createBid(itemID, existingUser, amount);
-        }
-      });
+      // User.findOne({ email: user.email }, (err, existingUser) => {
+      //   if (!existingUser) {
+      //     const newUser = new User(user);
+      //     newUser.save().then((bidder) => {
+      //       createBid(itemID, bidder, amount);
+      //     }).catch(err=>{ if(err) return console.log(err) });
+      //   } else {
+      //     createBid(itemID, existingUser, amount);
+      //   }
+      // });
 
       // console.log('bidding is closed')
     });
