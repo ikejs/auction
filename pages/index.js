@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
-import Logos from "./Logos";
-import Footer from "./Footer";
+import React, { useState } from "react";
+import io from 'socket.io-client';
+// import Logos from "./Logos";
+// import Footer from "./Footer";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -15,9 +16,9 @@ import validateUser from '../helpers/validateUser';
 import censorEmail from '../helpers/censorEmail';
 
 
-let socket = io.connect({ secure: true });
+const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL, { transports : ['websocket'] });
 
-const App = () => {
+const Home = () => {
 
   const [items, setItems] = useState([]);
   const [userInputsDialogOpen, setUserInputsDialogOpen] = useState(false); // TO CLOSE AUCTION, FALSE
@@ -222,7 +223,7 @@ const App = () => {
               )
             }) 
           }
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </div>
     </div>
@@ -230,4 +231,4 @@ const App = () => {
 }
 
 
-export default App;
+export default Home;
