@@ -91,6 +91,7 @@ const Home = () => {
               name="name"
               label="Name"
               type="text"
+              value={userInputs.name}
               onChange={handleUserInputChange}
               fullWidth
             />
@@ -99,6 +100,7 @@ const Home = () => {
               name="email"
               label="Email Address"
               type="email"
+              value={userInputs.email}
               onChange={handleUserInputChange}
               fullWidth
             />
@@ -107,6 +109,7 @@ const Home = () => {
               name="phone"
               label="Phone number"
               type="tel"
+              value={userInputs.phone}
               onChange={handleUserInputChange}
               fullWidth
             />
@@ -130,7 +133,7 @@ const Home = () => {
               <p className="px-2 mb-0">{user.email}</p>
               <p className="px-2 mb-0">{user.phone}</p>
             </div>
-            <Link href="/" className="text-white pt-0 mt-0"><small><u>change</u></small></Link>
+            <a role="button" onClick={()=>setUserInputsDialogOpen(true)} className="text-white pt-0 mt-0"><small><u>change</u></small></a>
           </div>
           )
       }
@@ -175,7 +178,7 @@ const Home = () => {
                               }} />
                             <div className="input-group-append">
                               <button className="btn" style={{ backgroundColor: "#1576BD", color: "white", fontWeight: "bold" }} type="button" onClick={() => {
-                                if (!bidInputs[i].length) return false;
+                                if (!bidInputs[i] || !bidInputs[i].length) return false;
                                 if (bidInputs[i] % 1 != 0) return alert("Whole numbers only");
                                 if (!item.bids.length && bidInputs[i] < 10 || parseInt(bidInputs[i] + 10) < bidInputs[i]) {
                                   return alert("Your bid must be $10 or more.")
