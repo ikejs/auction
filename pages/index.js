@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Link from 'next/link';
 import io from 'socket.io-client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Logos from "../components/Logos";
@@ -129,7 +130,7 @@ const Home = () => {
               <p className="px-2 mb-0">{user.email}</p>
               <p className="px-2 mb-0">{user.phone}</p>
             </div>
-            <a href="/" className="text-white pt-0 mt-0"><small><u>change</u></small></a>
+            <Link href="/" className="text-white pt-0 mt-0"><small><u>change</u></small></Link>
           </div>
           )
       }
