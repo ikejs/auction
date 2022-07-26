@@ -17,13 +17,14 @@ import useSound from 'use-sound';
 import validateUser from '../helpers/validateUser';
 import censorEmail from '../helpers/censorEmail';
 
+const hasAuction = false;
 
 const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL, { transports : ['websocket'] });
 
 const Home = () => {
 
   const [items, setItems] = useState([]);
-  const [userInputsDialogOpen, setUserInputsDialogOpen] = useState(false); // TO CLOSE AUCTION, FALSE
+  const [userInputsDialogOpen, setUserInputsDialogOpen] = useState(true); // TO CLOSE AUCTION, FALSE
   const [userInputs, setUserInputs] = useState({});
   const [user, setUser] = useState({});
   const [bidInputs, setBidInputs] = useState([]);
@@ -154,7 +155,7 @@ const Home = () => {
                     <div className="w-100" style={{ position:"relative", display:"inlineBlock" }}>
                       {item.bids.length ? 
                         <span style={{position: "absolute",bottom: "0",background: "#221F20",textAlign: "center",borderRadius: "0 10px 0 0",color: "white",padding: "5px 10px",fontSize: "20px",zIndex: "10"}}
-                          >Final Bid: <strong>
+                          >Current Bid: <strong>
                             <CurrencyFormat value={currentBid} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                           </strong>
                         </span>
@@ -169,7 +170,7 @@ const Home = () => {
                           <p className="lead text-muted mt-0 pt-0"><strong>{item.name2}</strong></p>
                           <p><small>{item.description}</small></p>
                         </div>
-                        {/* <div className="col-md-4 float-right">
+                        <div className="col-md-4 float-right">
                           <div className="input-group">
                             <input type="number" className="form-control" placeholder="0" 
                               onChange={e => {
@@ -194,7 +195,7 @@ const Home = () => {
                               }}>Bid</button>
                             </div>
                           </div>
-                        </div> */}
+                        </div>
                       </div>
                       {item.bids.length ?
                         <div style={{ textAlign: 'left' }}>
@@ -244,5 +245,11 @@ const Home = () => {
   )
 }
 
+const NoAuction = () => (
+  <div style={{ marginTop: '20%' }} className="d-flex flex-column align-items-center justify-content-center text-white">
+    <h1>no auctions available</h1>
+    <p className="lead">contact <Link href="mailto:td@radioplusinfo.com"><a className="text-white">td@radioplusinfo.com</a></Link></p>
+  </div>
+)
 
-export default Home;
+export default hasAuction ? Home : NoAuction;
