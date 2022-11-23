@@ -17,7 +17,7 @@ import useSound from 'use-sound';
 import validateUser from '../helpers/validateUser';
 import censorEmail from '../helpers/censorEmail';
 
-const hasAuction = false;
+const hasAuction = true;
 
 const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL, { transports : ['websocket'] });
 
@@ -127,7 +127,7 @@ const Home = () => {
       </>
       {
         user.name && (
-          <div className="w-100 p-1 sticky-top text-white text-center" style={{ backgroundColor: "#0163A2", boxShadow: "0 0 10px #1A244F" }}>
+          <div className="w-100 p-1 sticky-top text-white text-center" style={{ backgroundColor: "#312b2c", boxShadow: "0 0 10px #312b2c" }}>
             <p className="h6 mb-0">Bidding as</p>
             <div className="d-flex justify-content-center pb-0 mb-0">
               <p className="px-2 mb-0">{user.name}</p>
@@ -152,7 +152,7 @@ const Home = () => {
                 const currentBid = Math.max.apply(Math, item.bids.map((o) => o.amount));
                 return(
                   <div key={i} className="col-md-4 card text-center p-0 m-4" style={{ borderWidth: 0, borderRadius: '10px', boxShadow: '0 8px 12px 0 rgba(0,0,0,0.5)' }}>
-                    <div className="w-100" style={{ position:"relative", display:"inlineBlock" }}>
+                    <div className="w-100 pb-5" style={{ position:"relative", display:"inlineBlock" }}>
                       {item.bids.length ? 
                         <span style={{position: "absolute",bottom: "0",background: "#221F20",textAlign: "center",borderRadius: "0 10px 0 0",color: "white",padding: "5px 10px",fontSize: "20px",zIndex: "10"}}
                           >Current Bid: <strong>
@@ -161,16 +161,18 @@ const Home = () => {
                         </span>
                         : ""
                       }
-                      <img src={`/images/${item.image}`} className="w-100" style={{ position: "relative", zIndex: 0, borderTopLeftRadius: 6, borderTopRightRadius: 6 }} />
+                      <img src={`/images/${item.image}`} className="w-100 p-3" style={{ position: "relative", zIndex: 0, borderTopLeftRadius: 6, borderTopRightRadius: 6 }} />
                     </div>
                     <div className="m-3">
-                      <div className="row d-flex align-items-center">
-                        <div className="col-md-8 float-left" style={{ textAlign: "left" }}>
+                      {/* <div className="row d-flex align-items-center"> */}
+                      <div className="row d-flex align-items-center mb-3">
+                        {/* <div className="col-md-8 float-left" style={{ textAlign: "left" }}>
                           <h4 className="mt-2 mb-0 pb-0">{item.name}</h4>
                           <p className="lead text-muted mt-0 pt-0"><strong>{item.name2}</strong></p>
                           <p><small>{item.description}</small></p>
-                        </div>
-                        <div className="col-md-4 float-right">
+                        </div> */}
+                        {/* <div className="col-md-4 float-right"> */}
+                        <div className="col-md-5">
                           <div className="input-group">
                             <input type="number" className="form-control" placeholder="0" 
                               onChange={e => {
@@ -178,7 +180,7 @@ const Home = () => {
                                 setBidInputs(bidInputs);
                               }} />
                             <div className="input-group-append">
-                              <button className="btn" style={{ backgroundColor: "#1576BD", color: "white", fontWeight: "bold" }} type="button" onClick={() => {
+                              <button className="btn" style={{ backgroundColor: "black", color: "white", fontWeight: "bold" }} type="button" onClick={() => {
                                 if (!bidInputs[i] || !bidInputs[i].length) return false;
                                 if (bidInputs[i] % 1 != 0) return alert("Whole numbers only");
                                 if (!item.bids.length && bidInputs[i] < 10 || parseInt(bidInputs[i] + 10) < bidInputs[i]) {
@@ -227,15 +229,13 @@ const Home = () => {
                 )
               }) 
             }
-            <p className="text-white text-center col-md-8" style={{ padding: '1em', backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: '16px', boxShadow: "0 0 10px #1A244F" }}>
+            {/* <p className="text-white text-center col-md-8" style={{ padding: '1em', backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: '16px', boxShadow: "0 0 10px #1A244F" }}>
               <small>
                 Radio Plus has donated a 4-pack of EAA Admission tickets WITH parking to the Fond du Lac Relay for Life. <br />
                 Bidding ends Wednesday <strong>July 20th, 3PM CST</strong><br />
                 EAA is <strong>July 25 - July 31.</strong><br />
-                {/* Bid on 4 pack of tickets with parking. Value $231 (must bid in $10 increments)<br />
-                Bid on 4 pack of tickets (no parking included). Value $216 (must bid in $10 increments)<br /> */}
               </small>
-            </p>
+            </p> */}
           </div>
           </div>
           <Footer />
