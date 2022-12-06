@@ -18,13 +18,14 @@ import validateUser from '../helpers/validateUser';
 import censorEmail from '../helpers/censorEmail';
 
 const hasAuction = true;
+const auctionActive = false; // TO CLOSE AUCTION, FALSE
 
 const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL, { transports : ['websocket'] });
 
 const Home = () => {
 
   const [items, setItems] = useState([]);
-  const [userInputsDialogOpen, setUserInputsDialogOpen] = useState(true); // TO CLOSE AUCTION, FALSE
+  const [userInputsDialogOpen, setUserInputsDialogOpen] = useState(auctionActive);
   const [userInputs, setUserInputs] = useState({});
   const [user, setUser] = useState({});
   const [bidInputs, setBidInputs] = useState([]);
@@ -155,7 +156,7 @@ const Home = () => {
                     <div className="w-100 pb-5" style={{ position:"relative", display:"inlineBlock" }}>
                       {item.bids.length ? 
                         <span style={{position: "absolute",bottom: "0",background: "#221F20",textAlign: "center",borderRadius: "0 10px 0 0",color: "white",padding: "5px 10px",fontSize: "20px",zIndex: "10"}}
-                          >Current Bid: <strong>
+                          >{auctionActive ? 'Current' : 'Final'} Bid: <strong>
                             <CurrencyFormat value={currentBid} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                           </strong>
                         </span>
@@ -172,7 +173,7 @@ const Home = () => {
                           <p><small>{item.description}</small></p>
                         </div> */}
                         {/* <div className="col-md-4 float-right"> */}
-                        <div className="col-md-5">
+                        {auctionActive && (<div className="col-md-5">
                           <div className="input-group">
                             <input type="number" className="form-control" placeholder="0" 
                               onChange={e => {
@@ -197,7 +198,7 @@ const Home = () => {
                               }}>Bid</button>
                             </div>
                           </div>
-                        </div>
+                        </div>)}
                       </div>
                       {item.bids.length ?
                         <div style={{ textAlign: 'left' }}>
