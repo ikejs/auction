@@ -2,7 +2,7 @@ const Logos = () => {
   return (
     <>
       <div className="col-md-6 offset-md-3">
-      <img className="w-100" src="/images/logo.jpg"  style={{ borderRadius: '0 0 16px 16px', boxShadow: "0 0 10px #231F20" }} />
+      <img src="/images/berg.jpg"  style={{ borderRadius: '0 0 16px 16px', boxShadow: "0 0 10px #231F20", width: '10rem' }} />
       {/* <nav className="navbar navbar-custom navbar-static-top"> */}
         {/* <div className="row"> */}
           {/* <div className="col-xs-12 d-flex justify-content-center"> */}

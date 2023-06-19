@@ -1,5 +1,5 @@
-const HAS_AUCTION = false;
-const AUCTION_ACTIVE = false;
+const HAS_AUCTION = true;
+const AUCTION_ACTIVE = true;
 
 import React, { useState } from "react";
 import Link from 'next/link';
@@ -153,7 +153,7 @@ const Home = () => {
                 const currentBid = Math.max.apply(Math, item.bids.map((o) => o.amount));
                 return(
                   <div key={i} className="col-md-4 card text-center p-0 m-4" style={{ borderWidth: 0, borderRadius: '10px', boxShadow: '0 8px 12px 0 rgba(0,0,0,0.5)' }}>
-                    <div className="w-100 pb-5" style={{ position:"relative", display:"inlineBlock" }}>
+                    <div className="w-100" style={{ position:"relative", display:"inlineBlock" }}>
                       {item.bids.length ? 
                         <span style={{position: "absolute",bottom: "0",background: "#221F20",textAlign: "center",borderRadius: "0 10px 0 0",color: "white",padding: "5px 10px",fontSize: "20px",zIndex: "10"}}
                           >{AUCTION_ACTIVE ? 'Current' : 'Final'} Bid: <strong>
@@ -167,11 +167,11 @@ const Home = () => {
                     <div className="m-3">
                       {/* <div className="row d-flex align-items-center"> */}
                       <div className="row d-flex align-items-center mb-3">
-                        {/* <div className="col-md-8 float-left" style={{ textAlign: "left" }}>
+                        <div className="col-md-8 float-left" style={{ textAlign: "left" }}>
                           <h4 className="mt-2 mb-0 pb-0">{item.name}</h4>
                           <p className="lead text-muted mt-0 pt-0"><strong>{item.name2}</strong></p>
                           <p><small>{item.description}</small></p>
-                        </div> */}
+                        </div>
                         {/* <div className="col-md-4 float-right"> */}
                         {AUCTION_ACTIVE && (<div className="col-md-5">
                           <div className="input-group">
@@ -230,13 +230,11 @@ const Home = () => {
                 )
               }) 
             }
-            {/* <p className="text-white text-center col-md-8" style={{ padding: '1em', backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: '16px', boxShadow: "0 0 10px #1A244F" }}>
+            <p className="text-white text-center col-md-8" style={{ padding: '1em', backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: '16px', boxShadow: "0 0 10px #1A244F" }}>
               <small>
-                Radio Plus has donated a 4-pack of EAA Admission tickets WITH parking to the Fond du Lac Relay for Life. <br />
-                Bidding ends Wednesday <strong>July 20th, 3PM CST</strong><br />
-                EAA is <strong>July 25 - July 31.</strong><br />
+              95 + 96-1 The Rock and Sunny 97-7 have 2 autographed Matt LaFleur footballs to auction off, with proceeds going to Make-A-Wish
               </small>
-            </p> */}
+            </p>
           </div>
           </div>
           <Footer />
