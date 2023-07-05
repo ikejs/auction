@@ -1,5 +1,5 @@
 const HAS_AUCTION = true;
-const AUCTION_ACTIVE = false;
+const AUCTION_ACTIVE = true;
 
 import React, { useState } from "react";
 import Link from 'next/link';
@@ -140,13 +140,16 @@ const Home = () => {
           )
       }
 
-      <Logos />
+      {/* <Logos /> */}
       {/* <div className="col-md-10 offset-md-1 px-4 mt-4 text-center"> */}
         {/* <p className="text-muted h6">Auction completed.</p> */}
         {/* <p className="text-muted"><small>Bids must be {'≥'}$10 higher than the current bid.</small></p> */}
       {/* </div> */}
       <div className="col-md-10 offset-md-1">
         <div className="mt-4 container">
+          <p className="text-white text-center" style={{ padding: '1em', backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: '16px', boxShadow: "0 0 10px #1A244F" }}>
+            Radio Plus has donated the following 3 items to the American Cancer Society
+          </p>
           <div className="row d-flex justify-content-center">
             {
               items.map((item, i) => { 
@@ -230,11 +233,11 @@ const Home = () => {
                 )
               }) 
             }
-            <p className="text-white text-center col-md-8" style={{ padding: '1em', backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: '16px', boxShadow: "0 0 10px #1A244F" }}>
+            {/* <p className="text-white text-center col-md-8" style={{ padding: '1em', backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: '16px', boxShadow: "0 0 10px #1A244F" }}>
               <small>
-              95 + 96-1 The Rock and Sunny 97-7 have 2 autographed Matt LaFleur footballs to auction off, with proceeds going to Make-A-Wish
+              Radio Plus has donated the following 3 items to the American Cancer Society
               </small>
-            </p>
+            </p> */}
           </div>
           </div>
           <Footer />
