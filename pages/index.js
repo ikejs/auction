@@ -233,11 +233,14 @@ const Home = () => {
                 )
               }) 
             }
-            {/* <p className="text-white text-center col-md-8" style={{ padding: '1em', backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: '16px', boxShadow: "0 0 10px #1A244F" }}>
+            <p className="text-white text-center col-md-8" style={{ padding: '1em', backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: '16px', boxShadow: "0 0 10px #1A244F" }}>
               <small>
-              Radio Plus has donated the following 3 items to the American Cancer Society
+                All bidding ends Wednesday July 19th at Noon.<br />
+                Please bid in $10 increments.<br />
+                Top bidders will be notified.<br />
+                Checks payable to American Cancer Society.<br />
               </small>
-            </p> */}
+            </p>
           </div>
           </div>
           <Footer />
