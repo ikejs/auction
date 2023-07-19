@@ -1,5 +1,5 @@
 const HAS_AUCTION = true;
-const AUCTION_ACTIVE = true;
+const AUCTION_ACTIVE = false;
 
 import React, { useState } from "react";
 import Link from 'next/link';
