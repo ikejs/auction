@@ -1,4 +1,4 @@
-const HAS_AUCTION = true;
+const HAS_AUCTION = false;
 const AUCTION_ACTIVE = false;
 
 import React, { useState } from "react";
