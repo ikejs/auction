@@ -1,5 +1,5 @@
-const HAS_AUCTION = false;
-const AUCTION_ACTIVE = false;
+const HAS_AUCTION = true;
+const AUCTION_ACTIVE = true;
 
 import React, { useState } from "react";
 import Link from 'next/link';
@@ -148,7 +148,8 @@ const Home = () => {
       <div className="col-md-10 offset-md-1">
         <div className="mt-4 container">
           <p className="text-white text-center" style={{ padding: '1em', backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: '16px', boxShadow: "0 0 10px #1A244F" }}>
-            Radio Plus has donated the following 3 items to the American Cancer Society
+            <span style={{ fontSize: '1.5em', fontWeight: 'bold' }}>NOAH'S ARK AUCTION FOR UNITED WAY</span><br />
+            Radio Plus has donated a 4 pack and 6 pack of general admission tickets to the Fond du Lac Area United Way.
           </p>
           <div className="row d-flex justify-content-center">
             {
@@ -235,10 +236,10 @@ const Home = () => {
             }
             <p className="text-white text-center col-md-8" style={{ padding: '1em', backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: '16px', boxShadow: "0 0 10px #1A244F" }}>
               <small>
-                All bidding ends Wednesday July 19th at Noon.<br />
+                All bidding ends Wednesday August 23rd at 3PM CST.<br />
                 Please bid in $10 increments.<br />
                 Top bidders will be notified.<br />
-                Checks payable to American Cancer Society.<br />
+                Checks payable to FDL Area United Way.<br />
               </small>
             </p>
           </div>
