@@ -1,5 +1,5 @@
 const HAS_AUCTION = true;
-const AUCTION_ACTIVE = false;
+const AUCTION_ACTIVE = true;
 
 import React, { useState } from "react";
 import Link from 'next/link';
@@ -236,7 +236,7 @@ const Home = () => {
             }
             <p className="text-white text-center col-md-8" style={{ padding: '1em', backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: '16px', boxShadow: "0 0 10px #1A244F" }}>
               <small>
-                All bidding ends Wednesday December 6th at 12PM CST.<br />
+                All bidding ends Thursday December 21st at 12PM CST.<br />
                 Please bid in $10 increments.<br />
                 Top bidders will be notified.<br />
                 Checks payable to <strong>Salvation Army</strong><br />
