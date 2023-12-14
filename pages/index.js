@@ -25,7 +25,7 @@ const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL, { transports : ['websocket
 const Home = () => {
 
   const [items, setItems] = useState([]);
-  const [userInputsDialogOpen, setUserInputsDialogOpen] = useState(AUCTION_ACTIVE);
+  const [userInputsDialogOpen, setUserInputsDialogOpen] = useState(false);
   const [userInputs, setUserInputs] = useState({});
   const [user, setUser] = useState({});
   const [bidInputs, setBidInputs] = useState([]);
@@ -49,7 +49,7 @@ const Home = () => {
   }
 
   const sendBid = (itemID, amount) => {
-    if(!user.email.length) {
+    if(!user.email?.length) {
       setUserInputsDialogOpen(true);
     } else {
       socket.emit('bid', { user, itemID, amount });
