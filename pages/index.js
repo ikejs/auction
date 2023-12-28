@@ -236,7 +236,7 @@ const Home = () => {
             }
             <p className="text-white text-center col-md-8" style={{ padding: '1em', backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: '16px', boxShadow: "0 0 10px #1A244F" }}>
               <small>
-                All bidding ends Thursday December 28th at 12PM CST.<br />
+                All bidding ends Thursday January 4th at 12PM CST.<br />
                 Please bid in $10 increments.<br />
                 Top bidders will be notified.<br />
                 Checks payable to <strong>Salvation Army</strong><br />
