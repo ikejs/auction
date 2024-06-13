@@ -147,10 +147,10 @@ const Home = () => {
       {/* </div> */}
       <div className="col-md-10 offset-md-1">
         <div className="mt-4 container">
-          {/* <p className="text-white text-center" style={{ padding: '1em', backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: '16px', boxShadow: "0 0 10px #1A244F" }}>
-            <span style={{ fontSize: '1.5em', fontWeight: 'bold' }}>{"NOAH'S"} ARK AUCTION FOR UNITED WAY</span><br />
-            Radio Plus has donated a 4 pack and 6 pack of general admission tickets to the Fond du Lac Area United Way.
-          </p> */}
+          <p className="text-white text-center" style={{ padding: '1em', backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: '16px', boxShadow: "0 0 10px #1A244F" }}>
+            <span style={{ fontSize: '1.5em', fontWeight: 'bold' }}>Bergstrom Automotive June 3500</span><br />
+             Supporting Make-A-Wish 
+          </p>
           <div className="row d-flex justify-content-center">
             {
               items.map((item, i) => { 
