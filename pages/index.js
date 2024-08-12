@@ -1,5 +1,5 @@
 const HAS_AUCTION = true;
-const AUCTION_ACTIVE = false;
+const AUCTION_ACTIVE = true;
 
 import React, { useState } from "react";
 import Link from 'next/link';
@@ -148,7 +148,9 @@ const Home = () => {
       <div className="col-md-10 offset-md-1">
         <div className="mt-4 container">
           <p className="text-white text-center" style={{ padding: '1em', backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: '16px', boxShadow: "0 0 10px #1A244F" }}>
-            <span style={{ fontSize: '1.5em', fontWeight: 'bold' }}>RELAY FOR LIFE</span><br />
+            {/* <span style={{ fontSize: '1.5em', fontWeight: 'bold' }}>RELAY FOR LIFE</span><br /> */}
+            Radio Plus has donated the following ticket packages to Thelma.<br />
+            <small>Proceeds benefit Thelma Center for the Arts Fond du Lac.</small>
           </p>
           <div className="row d-flex justify-content-center">
             {
@@ -235,10 +237,10 @@ const Home = () => {
             }
             <p className="text-white text-center col-md-8" style={{ padding: '1em', backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: '16px', boxShadow: "0 0 10px #1A244F" }}>
               <small>
-                All bidding ends Monday July 8 at 1PM CST.<br />
+                All bidding ends Monday August 15th at 12PM CST.<br />
                 Please bid in $10 increments.<br />
                 Top bidders will be notified.<br />
-                Checks payable to <strong>American Cancer Society</strong><br />
+                Checks payable to <strong>Thelma</strong><br />
               </small>
             </p>
           </div>
