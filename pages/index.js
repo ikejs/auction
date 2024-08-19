@@ -153,7 +153,7 @@ const Home = () => {
             <small>Proceeds benefit Thelma Center for the Arts Fond du Lac.</small>
             <br />
             <small>
-                All bidding ends Monday August 15th at 12PM CST.<br />
+                All bidding ends Thursday August 22nd at 12PM CST.<br />
                 Please bid in $10 increments.<br />
                 Top bidders will be notified.<br />
                 Checks payable to <strong>Thelma</strong><br />
