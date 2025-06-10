@@ -153,7 +153,7 @@ const Home = () => {
                 All bidding ends Thursday June 19th at 1PM CST.<br />
                 Please bid in $10 increments.<br />
                 Top bidders will be notified.<br />
-                Checks payable to <strong>Make A Wish</strong><br />
+                Checks payable to <strong>Make A Wish Foundation</strong><br />
               </small>
           </p>
           <div className="row d-flex justify-content-center">
