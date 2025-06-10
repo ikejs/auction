@@ -140,7 +140,7 @@ const Home = () => {
           )
       }
 
-      {/* <Logos /> */}
+      <Logos />
       {/* <div className="col-md-10 offset-md-1 px-4 mt-4 text-center"> */}
         {/* <p className="text-muted h6">Auction completed.</p> */}
         {/* <p className="text-muted"><small>Bids must be {'≥'}$10 higher than the current bid.</small></p> */}
@@ -149,14 +149,11 @@ const Home = () => {
         <div className="mt-4 container">
           <p className="text-white text-center" style={{ padding: '1em', backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: '16px', boxShadow: "0 0 10px #1A244F" }}>
             {/* <span style={{ fontSize: '1.5em', fontWeight: 'bold' }}>RELAY FOR LIFE</span><br /> */}
-            Radio Plus has donated the following ticket packages to Thelma.<br />
-            <small>Proceeds benefit Thelma Center for the Arts Fond du Lac.</small>
-            <br />
             <small>
-                All bidding ends Thursday August 22nd at 2PM CST.<br />
+                All bidding ends Thursday June 19th at 1PM CST.<br />
                 Please bid in $10 increments.<br />
                 Top bidders will be notified.<br />
-                Checks payable to <strong>Thelma</strong><br />
+                Checks payable to <strong>Make A Wish</strong><br />
               </small>
           </p>
           <div className="row d-flex justify-content-center">
@@ -204,6 +201,9 @@ const Home = () => {
                                 }
                                 if ((parseInt(bidInputs[i]) <= 0) || (parseInt(bidInputs[i]) <= currentBid)) {
                                   return alert("Your bid must be higher than the current bid.")
+                                }
+                                if (parseInt(bidInputs[i]) > 10000) {
+                                  return alert("Maximum bid amount is $10,000. Please contact the auction administrator for higher bids.")
                                 } else {
                                   sendBid(items[i]._id, bidInputs[i]);
                                 }
