@@ -19,6 +19,7 @@ import CurrencyFormat from 'react-currency-format';
 import useSound from 'use-sound';
 import validateUser from '../helpers/validateUser';
 import censorEmail from '../helpers/censorEmail';
+import Image from 'next/image';
 
 const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL, { transports : ['websocket'] });
 
@@ -171,7 +172,7 @@ const Home = () => {
                         </span>
                         : ""
                       }
-                      <img src={`/images/${item.image}`} className="w-100 p-3" style={{ position: "relative", zIndex: 0, borderTopLeftRadius: 6, borderTopRightRadius: 6 }} />
+                      <Image src={`/images/${item.image}`} alt={item.name} className="w-100 p-3" style={{ position: "relative", zIndex: 0, borderTopLeftRadius: 6, borderTopRightRadius: 6 }} width={400} height={300} />
                     </div>
                     <div className="m-3">
                       {/* <div className="row d-flex align-items-center"> */}
