@@ -1,6 +1,8 @@
 import Image from 'next/image';
 
 const Logos = () => {
+
+  
   return (
     <div className="container pb-4">
       <div className="d-flex justify-content-center">
