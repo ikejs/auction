@@ -11,7 +11,7 @@ import { BidderModal } from "./BidderModal";
 export function AuctionView({
   initialState,
   slug,
-  theme = "dark",
+  theme = "light",
   embedded = false,
 }: {
   initialState: AuctionState;

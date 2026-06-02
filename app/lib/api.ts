@@ -2,9 +2,9 @@ import type { AuctionState } from "./types";
 
 export type Theme = "dark" | "light";
 
-/** Theme from a request URL's ?theme= param. Defaults to dark. */
+/** Theme from a request URL's ?theme= param. Defaults to light. */
 export function parseTheme(requestUrl: string): Theme {
-  return new URL(requestUrl).searchParams.get("theme") === "light" ? "light" : "dark";
+  return new URL(requestUrl).searchParams.get("theme") === "dark" ? "dark" : "light";
 }
 
 // Base URL of the DigitalOcean backend (REST + socket.io). Inlined by Vite at

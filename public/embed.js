@@ -6,7 +6,7 @@
  *   <script src="https://your-auction-site/embed.js" defer></script>
  *
  * - Omit data-slug (or leave it empty) to show the current live auction.
- * - data-theme is "dark" (default) or "light".
+ * - data-theme is "light" (default) or "dark".
  * - Multiple widgets per page are supported.
  */
 (function () {

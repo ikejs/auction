@@ -62,7 +62,7 @@ never clash and live bidding / sound / emails all keep working.
 ```
 
 - Omit `data-slug` (or leave it empty) to always show the **current live** auction.
-- `data-theme` is `dark` (default) or `light`.
+- `data-theme` is `light` (default) or `dark`.
 - Multiple widgets per page are supported.
 - When a visitor enters their bidder details, the iframe briefly expands to a full-viewport
   overlay so the form is centered, then collapses back — handled automatically.
