@@ -205,6 +205,14 @@ export function AuctionView({
 
         <p className="mt-10 text-center text-xs text-slate-400 dark:text-slate-500">
           Bids are binding. Top bidders will be notified by email.
+          <br />
+          Need help? Email{" "}
+          <a
+            href={`mailto:${CONTACT_EMAIL}`}
+            className="font-medium text-indigo-600 hover:underline dark:text-indigo-400"
+          >
+            {CONTACT_EMAIL}
+          </a>
         </p>
       </main>
 
