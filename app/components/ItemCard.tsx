@@ -142,7 +142,8 @@ export function ItemCard({
                     step={inc}
                     onChange={(e) => setAmt(Math.floor(Number(e.target.value)) || 0)}
                     onKeyDown={(e) => e.key === "Enter" && submit()}
-                    className="w-16 border-0 bg-transparent py-2.5 text-left text-base font-semibold tabular-nums text-slate-900 focus:outline-none focus:ring-0 dark:text-white"
+                    style={{ width: `${String(amt).length + 1}ch` }}
+                    className="border-0 bg-transparent py-2.5 text-center text-base font-semibold tabular-nums text-slate-900 focus:outline-none focus:ring-0 dark:text-white [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                   />
                 </label>
                 <button
