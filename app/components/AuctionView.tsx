@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuctionSocket } from "../lib/useAuctionSocket";
 import { loadBidder, saveBidder } from "../lib/bidder";
 import { playBidSound } from "../lib/sound";
-import { imageUrl, type Theme } from "../lib/api";
+import { imageUrl, CONTACT_EMAIL, type Theme } from "../lib/api";
 import type { AuctionState, Bidder } from "../lib/types";
 import { Countdown } from "./Countdown";
 import { ItemCard } from "./ItemCard";
@@ -103,8 +103,17 @@ export function AuctionView({
           embedded ? "py-20" : "min-h-screen"
         }`}
       >
-        <h1 className="text-2xl font-bold sm:text-3xl">No active auction</h1>
+        <h1 className="text-2xl font-bold sm:text-3xl">No active auction right now</h1>
         <p className="text-slate-500 dark:text-slate-400">Please check back soon.</p>
+        <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+          Questions?{" "}
+          <a
+            href={`mailto:${CONTACT_EMAIL}`}
+            className="font-medium text-indigo-600 hover:underline dark:text-indigo-400"
+          >
+            {CONTACT_EMAIL}
+          </a>
+        </p>
       </div>
     );
   }

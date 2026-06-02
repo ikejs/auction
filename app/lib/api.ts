@@ -15,6 +15,10 @@ export const API_URL =
 /** Socket.io connects to the same host as the REST API. */
 export const SOCKET_URL = API_URL;
 
+/** Contact shown on the "no active auction" screen. */
+export const CONTACT_EMAIL =
+  import.meta.env.VITE_CONTACT_EMAIL || "info@radioplusinfo.com";
+
 export async function fetchCurrentAuction(): Promise<AuctionState> {
   const res = await fetch(`${API_URL}/api/auctions/current`);
   if (!res.ok) throw new Response("Failed to load auction", { status: 502 });
