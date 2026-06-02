@@ -24,7 +24,53 @@
     return window.location.origin;
   })();
 
-  var embeds = []; // { iframe, height }
+  var embeds = []; // { iframe, height, lifted }
+
+  // A position:fixed element only escapes to the real viewport if NONE of its
+  // ancestors establish a containing block / stacking context via transform,
+  // filter, perspective, etc. WordPress/Elementor themes routinely set these on
+  // a content wrapper, which traps our full-viewport overlay inside that
+  // ancestor — letting other page content (e.g. "Similar Posts") render on top
+  // of the bid modal. While the modal is open we temporarily neutralize those
+  // properties on the ancestors so the overlay reaches the top of the page.
+  function isTrap(cs) {
+    return (
+      (cs.transform && cs.transform !== "none") ||
+      (cs.filter && cs.filter !== "none") ||
+      (cs.perspective && cs.perspective !== "none") ||
+      (cs.backdropFilter && cs.backdropFilter !== "none") ||
+      (cs.webkitBackdropFilter && cs.webkitBackdropFilter !== "none") ||
+      (cs.willChange && cs.willChange.indexOf("transform") > -1) ||
+      (cs.contain && /paint|layout|strict|content/.test(cs.contain))
+    );
+  }
+
+  function liftEmbed(rec) {
+    if (rec.lifted) return;
+    rec.lifted = [];
+    var el = rec.iframe.parentElement;
+    while (el && el !== document.body && el !== document.documentElement) {
+      if (isTrap(window.getComputedStyle(el))) {
+        rec.lifted.push({ el: el, cssText: el.style.cssText });
+        el.style.setProperty("transform", "none", "important");
+        el.style.setProperty("filter", "none", "important");
+        el.style.setProperty("perspective", "none", "important");
+        el.style.setProperty("backdrop-filter", "none", "important");
+        el.style.setProperty("-webkit-backdrop-filter", "none", "important");
+        el.style.setProperty("will-change", "auto", "important");
+        el.style.setProperty("contain", "none", "important");
+      }
+      el = el.parentElement;
+    }
+  }
+
+  function dropEmbed(rec) {
+    if (!rec.lifted) return;
+    for (var i = 0; i < rec.lifted.length; i++) {
+      rec.lifted[i].el.style.cssText = rec.lifted[i].cssText;
+    }
+    rec.lifted = null;
+  }
 
   function mount(el) {
     if (el.__rpAuctionMounted) return;
@@ -71,14 +117,18 @@
       }
     } else if (data.type === "rp-auction-modal") {
       if (data.open) {
-        // Expand the iframe to cover the viewport so the centered modal works.
+        // Expand the iframe to cover the viewport so the centered modal works,
+        // and lift it out of any transformed/filtered ancestor that would trap
+        // it below other page content.
         rec.iframe.style.cssText =
           "position:fixed;inset:0;width:100%;height:100%;border:0;z-index:2147483647;background:transparent;";
+        liftEmbed(rec);
       } else {
         rec.iframe.style.cssText =
           "width:100%;border:0;display:block;height:" +
           rec.height +
           "px;background:transparent;";
+        dropEmbed(rec);
       }
     }
   });
