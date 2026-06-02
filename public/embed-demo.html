@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Embed demo — host site</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 0; color: #1e293b; }
+      .wrap { max-width: 820px; margin: 0 auto; padding: 24px 16px 64px; }
+      header.site { background: #0f766e; color: #fff; padding: 20px 16px; }
+      header.site .wrap { padding: 0 16px; }
+      .note { background: #f1f5f9; border-radius: 10px; padding: 12px 16px; font-size: 14px; color: #475569; }
+      code { background: #e2e8f0; padding: 2px 6px; border-radius: 4px; }
+    </style>
+  </head>
+  <body>
+    <header class="site">
+      <div class="wrap"><strong>Example Charity Foundation</strong> — a pretend host website</div>
+    </header>
+    <div class="wrap">
+      <h1>Support our cause</h1>
+      <p class="note">
+        Everything below the line is the embedded auction widget — dropped in with the two-line
+        snippet (a <code>&lt;div class="rp-auction"&gt;</code> and the <code>embed.js</code> script).
+        It renders live, resizes itself, and opens its bid form as a full-page overlay.
+      </p>
+      <hr />
+
+      <!-- ▼▼▼ the embed snippet ▼▼▼ -->
+      <div class="rp-auction" data-slug="demo-auction"></div>
+      <script src="/embed.js" defer></script>
+      <!-- ▲▲▲ the embed snippet ▲▲▲ -->
+
+      <hr />
+      <p class="note">…more of the host site's own content would continue here.</p>
+    </div>
+  </body>
+</html>

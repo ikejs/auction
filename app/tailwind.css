@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+/* Theme is driven by a [data-theme] attribute on the widget wrapper, so the
+   embeddable widget can render dark (default) or light per its embed param. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+html,
+body {
+  @apply min-h-full;
+  background: transparent;
+}
+
+/* Bid price pulse on a realtime update (works on light + dark). */
+@keyframes bid-flash {
+  0% {
+    background-color: rgb(99 102 241 / 0.25);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+.bid-flash {
+  animation: bid-flash 1.2s ease-out;
+}
