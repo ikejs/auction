@@ -132,8 +132,8 @@ export function ItemCard({
                 >
                   −
                 </button>
-                <div className="flex min-w-0 flex-1 items-center justify-center border-x border-slate-200 dark:border-white/10">
-                  <span className="text-slate-400 dark:text-slate-500">$</span>
+                <label className="flex min-w-0 flex-1 cursor-text items-center justify-center gap-0.5 border-x border-slate-200 dark:border-white/10">
+                  <span className="text-base font-semibold text-slate-400 dark:text-slate-500">$</span>
                   <input
                     type="number"
                     inputMode="numeric"
@@ -142,9 +142,9 @@ export function ItemCard({
                     step={inc}
                     onChange={(e) => setAmt(Math.floor(Number(e.target.value)) || 0)}
                     onKeyDown={(e) => e.key === "Enter" && submit()}
-                    className="w-full min-w-0 border-0 bg-transparent py-2.5 text-center text-base font-semibold tabular-nums text-slate-900 focus:outline-none focus:ring-0 dark:text-white"
+                    className="w-16 border-0 bg-transparent py-2.5 text-left text-base font-semibold tabular-nums text-slate-900 focus:outline-none focus:ring-0 dark:text-white"
                   />
-                </div>
+                </label>
                 <button
                   type="button"
                   aria-label="Raise bid"

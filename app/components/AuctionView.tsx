@@ -7,6 +7,7 @@ import type { AuctionState, Bidder } from "../lib/types";
 import { Countdown } from "./Countdown";
 import { ItemCard } from "./ItemCard";
 import { BidderModal } from "./BidderModal";
+import { ConfirmBidModal } from "./ConfirmBidModal";
 
 export function AuctionView({
   initialState,
@@ -28,8 +29,12 @@ export function AuctionView({
   const [bidder, setBidder] = useState<Bidder | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [pending, setPending] = useState<{ itemId: string; amount: number } | null>(null);
+  const [confirming, setConfirming] = useState<{ itemId: string; amount: number } | null>(null);
 
   useEffect(() => setBidder(loadBidder()), []);
+
+  const itemName = (id: string) =>
+    state?.items.find((i) => i.id === id)?.name ?? "this item";
 
   // Embed: report height so the host iframe auto-resizes, and signal modal
   // open/close so the host can expand the iframe to a full-viewport overlay.
@@ -52,16 +57,20 @@ export function AuctionView({
 
   useEffect(() => {
     if (!embedded || typeof window === "undefined" || window.parent === window) return;
-    window.parent.postMessage({ type: "rp-auction-modal", open: modalOpen }, "*");
-  }, [embedded, modalOpen]);
+    window.parent.postMessage(
+      { type: "rp-auction-modal", open: modalOpen || confirming !== null },
+      "*"
+    );
+  }, [embedded, modalOpen, confirming]);
 
+  // Bid flow: collect identity if needed, then always confirm before placing.
   const handleBid = (itemId: string, amount: number) => {
     if (!bidder) {
       setPending({ itemId, amount });
       setModalOpen(true);
       return;
     }
-    placeBid(itemId, bidder, amount);
+    setConfirming({ itemId, amount });
   };
 
   const handleSaveBidder = (b: Bidder) => {
@@ -69,9 +78,21 @@ export function AuctionView({
     setBidder(b);
     setModalOpen(false);
     if (pending) {
-      placeBid(pending.itemId, b, pending.amount);
+      setConfirming(pending);
       setPending(null);
     }
+  };
+
+  const confirmBid = () => {
+    if (confirming && bidder) placeBid(confirming.itemId, bidder, confirming.amount);
+    setConfirming(null);
+  };
+
+  const editInfoFromConfirm = () => {
+    if (!confirming) return;
+    setPending(confirming);
+    setConfirming(null);
+    setModalOpen(true);
   };
 
   if (!state) {
@@ -193,8 +214,22 @@ export function AuctionView({
       <BidderModal
         open={modalOpen}
         initial={bidder}
-        onCancel={() => setModalOpen(false)}
+        onCancel={() => {
+          setModalOpen(false);
+          setPending(null);
+        }}
         onSave={handleSaveBidder}
+      />
+
+      <ConfirmBidModal
+        open={confirming !== null}
+        itemName={confirming ? itemName(confirming.itemId) : ""}
+        amount={confirming?.amount ?? 0}
+        currency={auction.currency}
+        bidder={bidder}
+        onCancel={() => setConfirming(null)}
+        onConfirm={confirmBid}
+        onEditInfo={editInfoFromConfirm}
       />
     </div>
   );
